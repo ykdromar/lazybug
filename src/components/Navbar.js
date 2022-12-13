@@ -14,8 +14,9 @@ const Navbar = () => {
       </div>
       <div className={styles.rightNav}>
         <div className={styles.user}>
-          <a href="">
+          <a href="/">
             <img
+              alt="user"
               src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               className={styles.userDp}
             ></img>
