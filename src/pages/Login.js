@@ -1,12 +1,14 @@
 import { useState } from "react";
 import styles from "../styles/login.module.css";
 import { useToasts } from "react-toast-notifications";
-import { login } from "../api";
+import { useAuth } from "../hooks";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
   const { addToast } = useToasts();
+  const auth = useAuth();
+  console.log(auth);
   const handelSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -15,17 +17,17 @@ const Login = () => {
       });
     }
     setLoggingIn(true);
-    const response = await login(email, password);
+    const response = await auth.login(email, password);
     if (response.success) {
       return addToast("Logged In Successfully", {
         appearance: "success",
       });
     } else {
-      setLoggingIn(false);
       return addToast("Invalid email/Password", {
         appearance: "error",
       });
     }
+    setLoggingIn(false);
   };
   return (
     <form className={styles.loginForm} onSubmit={handelSubmit}>
