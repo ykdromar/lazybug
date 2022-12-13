@@ -19,15 +19,18 @@ const Login = () => {
     setLoggingIn(true);
     const response = await auth.login(email, password);
     if (response.success) {
+      setLoggingIn(false);
+
       return addToast("Logged In Successfully", {
         appearance: "success",
       });
     } else {
+      setLoggingIn(false);
+
       return addToast("Invalid email/Password", {
         appearance: "error",
       });
     }
-    setLoggingIn(false);
   };
   return (
     <form className={styles.loginForm} onSubmit={handelSubmit}>

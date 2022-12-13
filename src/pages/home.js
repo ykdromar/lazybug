@@ -1,6 +1,17 @@
 import styles from "../styles/home.module.css";
-
-const Home = ({ posts }) => {
+import { useEffect, useState } from "react";
+import { getPosts } from "../api";
+const Home = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await getPosts();
+      if (response.success) {
+        setPosts(response.data.posts);
+      }
+    };
+    fetchPosts();
+  }, []);
   return (
     <div className={styles.postsList}>
       {posts.map((post) => (
