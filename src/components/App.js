@@ -18,6 +18,7 @@ function App() {
   if (loading) {
     return <Loader />;
   }
+  console.log(posts);
   return (
     <div className="App">
       <Navbar />

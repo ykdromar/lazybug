@@ -21,10 +21,10 @@ const Home = ({ posts }) => {
             <div className={styles.postActions}>
               <div className={styles.postLike}>
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png"
+                  src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"
                   alt="likes-icon"
                 />
-                <span>5</span>
+                <span>{post.likes.length}</span>
               </div>
 
               <div className={styles.postCommentsIcon}>
@@ -32,7 +32,7 @@ const Home = ({ posts }) => {
                   src="https://cdn-icons-png.flaticon.com/512/13/13673.png"
                   alt="comments-icon"
                 />
-                <span>2</span>
+                <span>{post.comments.length}</span>
               </div>
             </div>
             <div className={styles.postCommentBox}>
@@ -40,15 +40,23 @@ const Home = ({ posts }) => {
             </div>
 
             <div className={styles.postCommentsList}>
-              <div className={styles.postCommentsItem}>
-                <div className={styles.postCommentHeader}>
-                  <span className={styles.postCommentAuthor}>Bill</span>
-                  <span className={styles.postCommentTime}>a minute ago</span>
-                  <span className={styles.postCommentLikes}>22</span>
-                </div>
+              {post.comments.map((comment) => (
+                <div className={styles.postCommentsItem} key={comment._id}>
+                  <div className={styles.postCommentHeader}>
+                    <span className={styles.postCommentAuthor}>
+                      {comment.user.name}
+                    </span>
+                    <span className={styles.postCommentTime}>a minute ago</span>
+                    <span className={styles.postCommentLikes}>
+                      {comment.likes.length} Likes
+                    </span>
+                  </div>
 
-                <div className={styles.postCommentContent}>Random comment</div>
-              </div>
+                  <div className={styles.postCommentContent}>
+                    {comment.content}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
