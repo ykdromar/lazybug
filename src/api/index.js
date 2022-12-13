@@ -37,8 +37,14 @@ const customFetch = async (url, { body, ...customConfig }) => {
     };
   }
 };
-
-const getPosts = (page = 1, limit = 10) => {
+// function to get all the posts
+export const getPosts = (page = 1, limit = 10) => {
   return customFetch(API_URLS.posts(page, limit), { method: "GET" });
 };
-export { getPosts };
+// function to login
+export const login = (email, password) => {
+  return customFetch(API_URLS.login(), {
+    method: "POST",
+    body: { email, password },
+  });
+};
