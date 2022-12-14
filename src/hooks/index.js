@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { login as userLogin, signup as userSignUp } from "../api";
+import {
+  login as userLogin,
+  signup as userSignUp,
+  updateUser as updateProfile,
+} from "../api";
 import {
   setItemInLocalStorage,
   LOCALSTORAGE_TOKEN_KEY,
@@ -57,11 +61,31 @@ export const useProvideAuth = () => {
       };
     }
   };
+  const updateUser = async (id, name, password, confirmPassword) => {
+    const response = await updateProfile(id, name, password, confirmPassword);
+    console.log(response);
+    if (response.success) {
+      setUser(response.data.user);
+      setItemInLocalStorage(
+        LOCALSTORAGE_TOKEN_KEY,
+        response.data.token ? response.data.token : null
+      );
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+        message: response.message,
+      };
+    }
+  };
   return {
     user,
     login,
     logout,
     signup,
     loading,
+    updateUser,
   };
 };

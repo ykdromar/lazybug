@@ -55,3 +55,10 @@ export const signup = (name, email, password, confirm_password) => {
     body: { name, email, password, confirm_password },
   });
 };
+//function to update
+export const updateUser = (id, name, password, confirm_password) => {
+  return customFetch(API_URLS.editUser(), {
+    method: "POST",
+    body: { id, name, password, confirm_password },
+  });
+};
