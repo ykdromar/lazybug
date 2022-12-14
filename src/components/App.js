@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-import { Home, Login } from "../pages";
-import { Loader, Navbar } from "./";
+import { Home, Login, Signup } from "../pages";
+import { Navbar } from "./";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useAuth } from "../hooks";
-const About = () => {
-  return <h1>About</h1>;
-};
-const Contact = () => {
-  return <h1>Contact</h1>;
-};
+// import { useAuth } from "../hooks";
 function App() {
-  const auth = useAuth();
+  // const auth = useAuth();
 
-  if (auth.loading) {
-    return <Loader />;
-  }
+  // if (auth.loading) {
+  //   return <Loader />;
+  // }
   return (
     <div className="App">
       <BrowserRouter>
@@ -23,9 +17,9 @@ function App() {
 
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/about" element={<About />}></Route>
-          <Route exact path="/contact" element={<Contact />}></Route>
           <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/register" element={<Signup />}></Route>
+
           <Route
             exact
             path="*"

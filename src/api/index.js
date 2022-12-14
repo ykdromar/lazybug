@@ -48,3 +48,10 @@ export const login = (email, password) => {
     body: { email, password },
   });
 };
+//function to signup
+export const signup = (name, email, password, confirm_password) => {
+  return customFetch(API_URLS.signup(), {
+    method: "POST",
+    body: { name, email, password, confirm_password },
+  });
+};
