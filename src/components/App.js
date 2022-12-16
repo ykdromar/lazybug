@@ -1,15 +1,13 @@
-// import { useEffect, useState } from "react";
-
-import { Home, Login, Settings, Signup } from "../pages";
-import { Navbar } from "./";
+import React from "react";
+import { Home, Login, Settings, Signup, UserProfile } from "../pages";
+import { Loader, Navbar } from "./";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { useAuth } from "../hooks";
+import { useAuth } from "../hooks";
 function App() {
-  // const auth = useAuth();
-
-  // if (auth.loading) {
-  //   return <Loader />;
-  // }
+  const auth = useAuth();
+  if (auth.loading) {
+    return <Loader />;
+  }
   return (
     <div className="App">
       <BrowserRouter>
@@ -20,6 +18,7 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/register" element={<Signup />}></Route>
           <Route exact path="/settings" element={<Settings />}></Route>
+          <Route exact path="/user/:userId" element={<UserProfile />}></Route>
 
           <Route
             exact

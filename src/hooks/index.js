@@ -23,8 +23,8 @@ export const useProvideAuth = () => {
     if (userToken) {
       const user = jwtDecode(userToken);
       setUser(user);
-      setLoading(false);
     }
+    setLoading(false);
   }, []);
   const login = async (email, password) => {
     const response = await userLogin(email, password);

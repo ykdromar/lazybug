@@ -47,7 +47,7 @@ const Signup = () => {
     if (auth.user) {
       return Navigate("/");
     }
-  });
+  }, [auth]);
   return (
     <form className={styles.loginForm} onSubmit={handelSubmit}>
       <span className={styles.loginSignupHeader}>Register</span>

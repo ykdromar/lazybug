@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../hooks";
 const Navbar = () => {
   const auth = useAuth();
+  // console.log(auth.user);
   return (
     <div className={styles.nav}>
       <div className={styles.leftDiv}>

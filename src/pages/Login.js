@@ -10,7 +10,7 @@ const Login = () => {
   const { addToast } = useToasts();
   const auth = useAuth();
   const Navigate = useNavigate();
-  console.log(auth);
+
   const handelSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -35,10 +35,11 @@ const Login = () => {
     }
   };
   useEffect(() => {
-    if (auth.user) {
+    if (auth.user !== null) {
       return Navigate("/");
     }
-  });
+  }, [auth]);
+
   return (
     <form className={styles.loginForm} onSubmit={handelSubmit}>
       <span className={styles.loginSignupHeader}>Log In</span>
