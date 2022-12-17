@@ -62,3 +62,9 @@ export const updateUser = (id, name, password, confirm_password) => {
     body: { id, name, password, confirm_password },
   });
 };
+//function to fetch user details
+export const userInfo = (userId) => {
+  return customFetch(API_URLS.userInfo(userId), {
+    method: "GET",
+  });
+};
