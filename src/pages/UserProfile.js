@@ -1,16 +1,5 @@
 import styles from "../styles/settings.module.css";
-import { useAuth } from "../hooks";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 const UserProfile = () => {
-  const Navigate = useNavigate();
-  const auth = useAuth();
-
-  useEffect(() => {
-    if (!auth.user) {
-      return Navigate("/login");
-    }
-  }, [auth]);
   return (
     <div className={styles.settings}>
       <div className={styles.imgContainer}>

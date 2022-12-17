@@ -1,6 +1,6 @@
 import styles from "../styles/login.module.css";
 import { useToasts } from "react-toast-notifications";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -43,11 +43,11 @@ const Signup = () => {
       });
     }
   };
-  useEffect(() => {
-    if (auth.user) {
-      return Navigate("/");
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (auth.user) {
+  //     return Navigate("/");
+  //   }
+  // }, [auth]);
   return (
     <form className={styles.loginForm} onSubmit={handelSubmit}>
       <span className={styles.loginSignupHeader}>Register</span>

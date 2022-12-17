@@ -1,12 +1,10 @@
 import styles from "../styles/settings.module.css";
 import { useAuth } from "../hooks";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useToasts } from "react-toast-notifications";
-import { useNavigate } from "react-router-dom";
+
 const Settings = () => {
   const auth = useAuth();
-  console.log("auth in settings", auth);
-  const Navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
   const [name, setName] = useState(auth.user?.name);
   const [password, setPassword] = useState("");
@@ -50,11 +48,11 @@ const Settings = () => {
       });
     }
   };
-  useEffect(() => {
-    if (!auth.user) {
-      return Navigate("/login");
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (!auth.user) {
+  //     return Navigate("/login");
+  //   }
+  // }, [auth]);
   return (
     <div className={styles.settings}>
       <div className={styles.imgContainer}>
