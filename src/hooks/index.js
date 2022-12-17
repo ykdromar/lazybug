@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../providers/AuthProvider";
+import { AuthContext, PostContext } from "../providers";
 import {
   fetchUserFriends,
   login as userLogin,
   signup as userSignUp,
   updateUser as updateProfile,
+  getPosts,
 } from "../api";
 import {
   setItemInLocalStorage,
@@ -120,4 +121,34 @@ export const useProvideAuth = () => {
     updateUser,
     updateUserFriends,
   };
+};
+
+// useProvidePosts hook
+export const useProvidePosts = () => {
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await getPosts();
+      if (response.success) {
+        setPosts(response.data.posts);
+      }
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
+  const addPostToState = (post) => {
+    const newPosts = [post, ...posts];
+    setPosts(newPosts);
+  };
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  return {
+    posts,
+    loading,
+    addPostToState,
+  };
+};
+
+//usePosts hook
+export const usePosts = () => {
+  return useContext(PostContext);
 };
