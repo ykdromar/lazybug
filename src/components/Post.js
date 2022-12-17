@@ -1,6 +1,6 @@
 import styles from "../styles/home.module.css";
 import { useState } from "react";
-import { addComment } from "../api";
+import { addComment, toggleLike } from "../api";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { useAuth, usePosts } from "../hooks";
@@ -32,6 +32,51 @@ const Post = ({ post }) => {
       }
     }
   };
+
+  // function to handel post like
+  const handelPostLike = async () => {
+    const response = await toggleLike(post._id, "Post");
+    if (response.success) {
+      if (response.data.deleted) {
+        addToast("Unliked Post", {
+          appearance: "success",
+        });
+        return;
+      } else {
+        addToast("Liked Post", {
+          appearance: "success",
+        });
+        return;
+      }
+    } else {
+      addToast(response.message, {
+        appearance: "error",
+      });
+      return;
+    }
+  };
+  //function to handel comment like
+  const handelCommentLike = async (commentId) => {
+    const response = await toggleLike(commentId, "Comment");
+    if (response.success) {
+      if (response.data.deleted) {
+        addToast("Unliked Comment", {
+          appearance: "success",
+        });
+        return;
+      } else {
+        addToast("Liked Comment", {
+          appearance: "success",
+        });
+        return;
+      }
+    } else {
+      addToast(response.message, {
+        appearance: "error",
+      });
+      return;
+    }
+  };
   return (
     <div className={styles.postWrapper} key={post._id}>
       <div className={styles.postHeader}>
@@ -51,10 +96,16 @@ const Post = ({ post }) => {
 
         <div className={styles.postActions}>
           <div className={styles.postLike}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"
-              alt="likes-icon"
-            />
+            <button
+              onClick={handelPostLike}
+              disabled={!auth.user}
+              style={{ backgroundColor: "white", border: "none" }}
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"
+                alt="likes-icon"
+              />
+            </button>
             <span>{post.likes.length}</span>
           </div>
 
@@ -86,7 +137,20 @@ const Post = ({ post }) => {
                 </span>
                 <span className={styles.postCommentTime}>a minute ago</span>
                 <span className={styles.postCommentLikes}>
-                  {comment.likes.length} Likes
+                  <button
+                    onClick={() => {
+                      handelCommentLike(comment._id);
+                    }}
+                    disabled={!auth.user}
+                    style={{ backgroundColor: "white", border: "none" }}
+                  >
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png"
+                      alt="likes-icon"
+                      style={{ width: "18px" }}
+                    />
+                  </button>
+                  {comment.likes.length}
                 </span>
               </div>
 
