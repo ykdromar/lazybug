@@ -1,7 +1,7 @@
 import styles from "../styles/home.module.css";
 import { useEffect, useState } from "react";
 import { getPosts } from "../api";
-import { FriendList, Loader } from "../components";
+import { FriendList, Loader, CreatePost } from "../components";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks";
 const Home = () => {
@@ -24,6 +24,8 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.postsList}>
+        {auth.user && <CreatePost />}
+
         {posts.map((post) => (
           <div className={styles.postWrapper} key={post._id}>
             <div className={styles.postHeader}>
