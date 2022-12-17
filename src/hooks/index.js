@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import {
+  fetchUserFriends,
   login as userLogin,
   signup as userSignUp,
   updateUser as updateProfile,
@@ -17,23 +18,40 @@ export const useAuth = () => {
 };
 export const useProvideAuth = () => {
   const [user, setUser] = useState(null);
+  const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const userToken = getItemInLocalStorage(LOCALSTORAGE_TOKEN_KEY);
-    if (userToken) {
-      const user = jwtDecode(userToken);
-      setUser(user);
-    }
-    setLoading(false);
+    const getUser = async () => {
+      const userToken = getItemInLocalStorage(LOCALSTORAGE_TOKEN_KEY);
+      if (userToken) {
+        const user = jwtDecode(userToken);
+        setUser(user);
+        const response = await fetchUserFriends();
+        if (response.success) {
+          setFriends(response.data.friends);
+        } else {
+          setFriends([]);
+        }
+      }
+      setLoading(false);
+    };
+    getUser();
   }, []);
   const login = async (email, password) => {
     const response = await userLogin(email, password);
     if (response.success) {
-      setUser(response.data.user);
       setItemInLocalStorage(
         LOCALSTORAGE_TOKEN_KEY,
         response.data.token ? response.data.token : null
       );
+      setUser(response.data.user);
+      const response2 = await fetchUserFriends();
+      if (response2.success) {
+        setFriends(response2.data.friends);
+      } else {
+        setFriends([]);
+      }
+      console.log(response.data);
       return {
         success: true,
       };
@@ -80,12 +98,26 @@ export const useProvideAuth = () => {
       };
     }
   };
+  const updateUserFriends = (addFriend, friend) => {
+    if (addFriend) {
+      setFriends([...friends, friend]);
+    } else {
+      let newFriends = friends.filter((newFriend) => {
+        return newFriend.to_user._id !== friend ? newFriend : null;
+      });
+      console.log(newFriends);
+      setFriends(newFriends);
+    }
+    return;
+  };
   return {
     user,
+    friends,
     login,
     logout,
     signup,
     loading,
     updateUser,
+    updateUserFriends,
   };
 };

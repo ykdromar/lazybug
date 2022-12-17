@@ -2,7 +2,7 @@ import styles from "../styles/settings.module.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Loader } from "../components";
-import { userInfo } from "../api";
+import { addFriend, removeFriend, userInfo } from "../api";
 import { useToasts } from "react-toast-notifications";
 import { useAuth } from "../hooks";
 const UserProfile = () => {
@@ -10,6 +10,7 @@ const UserProfile = () => {
   const { userId } = useParams();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [inProgress, setInProgress] = useState(false);
   const { addToast } = useToasts();
   const Navigate = useNavigate();
   useEffect(() => {
@@ -33,14 +34,53 @@ const UserProfile = () => {
     getUser();
   }, [userId, Navigate, addToast]);
   //function to check if this user is friend
+  console.log(auth);
+
   const isFriend = () => {
-    const friendsArr = auth.user.friendships;
+    const friendsArr = auth.friends;
     const friendIds = friendsArr.map((friend) => friend.to_user._id);
-    const index = friendIds.indexOf(auth.user._id);
+    const index = friendIds.indexOf(userId);
     if (index !== -1) {
       return true;
     }
     return false;
+  };
+
+  // function to handel add friend button
+  const handelAddFriend = async () => {
+    setInProgress(true);
+    const response = await addFriend(userId);
+    if (response.success) {
+      const { friendship } = response.data;
+      auth.updateUserFriends(true, friendship);
+      addToast("You are now friends", {
+        appearance: "success",
+      });
+    } else {
+      addToast("Cannot Make Friend", {
+        appearance: "error",
+      });
+    }
+    setInProgress(false);
+    return;
+  };
+
+  //function to handel removeFriend button
+  const handelRemoveFriend = async () => {
+    setInProgress(true);
+    const response = await removeFriend(userId);
+    if (response.success) {
+      auth.updateUserFriends(false, userId);
+      addToast("You are now not friends", {
+        appearance: "success",
+      });
+    } else {
+      addToast("Cannot Remove Friend", {
+        appearance: "error",
+      });
+    }
+    setInProgress(false);
+    return;
   };
 
   if (loading) {
@@ -64,9 +104,21 @@ const UserProfile = () => {
       </div>
       <div className={styles.btnGrp}>
         {isFriend() ? (
-          <button className={`button ${styles.saveBtn}`}>Remove Friend</button>
+          <button
+            className={`button ${styles.saveBtn}`}
+            onClick={handelRemoveFriend}
+            disabled={inProgress}
+          >
+            {inProgress ? "Removing Friend..." : "Remove Friend"}
+          </button>
         ) : (
-          <button className={`button ${styles.saveBtn}`}>Add Friend</button>
+          <button
+            className={`button ${styles.saveBtn}`}
+            onClick={handelAddFriend}
+            disabled={inProgress}
+          >
+            {inProgress ? "Adding Friend..." : "Add Friend"}
+          </button>
         )}
       </div>
     </div>

@@ -3,10 +3,12 @@ import { useProvideAuth } from "../hooks";
 
 const initialState = {
   user: null,
+  friends: [],
   login: () => {},
   logout: () => {},
   signup: () => {},
   updateUser: () => {},
+  updateUserFriends: () => {},
   loading: true,
 };
 
