@@ -13,7 +13,7 @@ const Post = ({ post }) => {
   const handelAddComment = async (e) => {
     if (!addingComment && e.key === "Enter") {
       setAddingComment(true);
-      const response = await addComment(comment, post._id);
+      const response = await addComment(comment, post._id, auth.user._id);
       if (response.success) {
         // console.log(response.data);
         setComment("");
@@ -35,7 +35,7 @@ const Post = ({ post }) => {
 
   // function to handel post like
   const handelPostLike = async () => {
-    const response = await toggleLike(post._id, "Post");
+    const response = await toggleLike(post._id, "Post", auth.user._id);
     if (response.success) {
       if (response.data.deleted) {
         addToast("Unliked Post", {
@@ -57,7 +57,7 @@ const Post = ({ post }) => {
   };
   //function to handel comment like
   const handelCommentLike = async (commentId) => {
-    const response = await toggleLike(commentId, "Comment");
+    const response = await toggleLike(commentId, "Comment", auth.user._id);
     if (response.success) {
       if (response.data.deleted) {
         addToast("Unliked Comment", {
