@@ -27,12 +27,12 @@ export const useProvideAuth = () => {
       if (userToken) {
         const user = jwtDecode(userToken);
         setUser(user);
-        const response = await fetchUserFriends();
-        if (response.success) {
-          setFriends(response.data.friends);
-        } else {
-          setFriends([]);
-        }
+        // const response = await fetchUserFriends();
+        // if (response.success) {
+        //   setFriends(response.data.friends);
+        // } else {
+        //   setFriends([]);
+        // }
       }
       setLoading(false);
     };
@@ -46,12 +46,13 @@ export const useProvideAuth = () => {
         response.data.token ? response.data.token : null
       );
       setUser(response.data.user);
-      const response2 = await fetchUserFriends();
-      if (response2.success) {
-        setFriends(response2.data.friends);
-      } else {
-        setFriends([]);
-      }
+      // const response2 = await fetchUserFriends();
+      // if (response2.success) {
+      //   setFriends(response2.data.friends);
+      // } else {
+      //   setFriends([]);
+      // }
+      setFriends([]);
       console.log(response.data);
       return {
         success: true,

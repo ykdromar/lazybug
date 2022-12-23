@@ -34,7 +34,7 @@ const UserProfile = () => {
     getUser();
   }, [userId, Navigate, addToast]);
   //function to check if this user is friend
-  console.log(auth);
+  // console.log(auth);
 
   const isFriend = () => {
     const friendsArr = auth.friends;
@@ -102,7 +102,7 @@ const UserProfile = () => {
         <div className={styles.fieldLabel}>Name</div>
         <div className={styles.fieldValue}>{user.name}</div>
       </div>
-      <div className={styles.btnGrp}>
+      {/* <div className={styles.btnGrp}>
         {isFriend() ? (
           <button
             className={`button ${styles.saveBtn}`}
@@ -120,7 +120,7 @@ const UserProfile = () => {
             {inProgress ? "Adding Friend..." : "Add Friend"}
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
