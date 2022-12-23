@@ -37,6 +37,8 @@ const Post = ({ post }) => {
   const handelPostLike = async () => {
     const response = await toggleLike(post._id, "Post", auth.user._id);
     if (response.success) {
+      console.log(response);
+      postsContext.addLikesToPostState(response.data.likes, post._id);
       if (response.data.deleted) {
         addToast("Unliked Post", {
           appearance: "success",
@@ -56,9 +58,15 @@ const Post = ({ post }) => {
     }
   };
   //function to handel comment like
-  const handelCommentLike = async (commentId) => {
+  const handelCommentLike = async (commentId, postId) => {
     const response = await toggleLike(commentId, "Comment", auth.user._id);
     if (response.success) {
+      postsContext.addLikesToCommentState(
+        response.data.likes,
+        commentId,
+        postId
+      );
+
       if (response.data.deleted) {
         addToast("Unliked Comment", {
           appearance: "success",
@@ -139,7 +147,7 @@ const Post = ({ post }) => {
                 <span className={styles.postCommentLikes}>
                   <button
                     onClick={() => {
-                      handelCommentLike(comment._id);
+                      handelCommentLike(comment._id, post._id);
                     }}
                     disabled={!auth.user}
                     style={{ backgroundColor: "white", border: "none" }}

@@ -150,6 +150,33 @@ export const useProvidePosts = () => {
     });
     setPosts(newPosts);
   };
+  const addLikesToPostState = (Likes, postId) => {
+    const newPosts = posts.map((post) => {
+      if (post._id === postId) {
+        return { ...post, likes: Likes };
+      } else {
+        return post;
+      }
+    });
+    setPosts(newPosts);
+  };
+  const addLikesToCommentState = (Likes, commentId, postId) => {
+    const newPosts = posts.map((post) => {
+      if (post._id === postId) {
+        let newComments = post.comments.map((comment) => {
+          if (comment._id === commentId) {
+            return { ...comment, likes: Likes };
+          } else {
+            return comment;
+          }
+        });
+        return { ...post, comments: newComments };
+      } else {
+        return post;
+      }
+    });
+    setPosts(newPosts);
+  };
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   return {
@@ -157,6 +184,8 @@ export const useProvidePosts = () => {
     loading,
     addPostToState,
     addCommentToState,
+    addLikesToPostState,
+    addLikesToCommentState,
   };
 };
 
