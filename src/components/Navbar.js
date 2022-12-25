@@ -29,11 +29,11 @@ const Navbar = () => {
           <img
             alt=""
             src="https://cdn-icons-png.flaticon.com/512/3800/3800024.png"
-            style={{ width: "40px", height: "40px" }}
+            style={{ width: "35px", height: "35px" }}
           ></img>
         </Link>
       </div>
-      <div className={styles.searchContainer}>
+      {/* <div className={styles.searchContainer}>
         <img
           className={styles.searchIcon}
           src="https://cdn-icons-png.flaticon.com/512/149/149309.png"
@@ -64,8 +64,8 @@ const Navbar = () => {
             </ul>
           </div>
         )}
-      </div>
-      <div className={styles.rightNav}>
+      </div> */}
+      <div className={styles.rightDiv}>
         {auth.user && (
           <div className={styles.user}>
             <Link to="/settings">
@@ -80,25 +80,21 @@ const Navbar = () => {
         )}
 
         <div className={styles.navLinks}>
-          <ul>
-            {auth.user ? (
-              <>
-                <li>
-                  <span onClick={auth.logout}>Log out</span>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link to="/login">Log in</Link>
-                </li>
+          {auth.user ? (
+            <>
+              <button onClick={auth.logout}>Log out</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <button>Sign in</button>
+              </Link>
 
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-              </>
-            )}
-          </ul>
+              <Link to="/register">
+                <button>Register</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
