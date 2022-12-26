@@ -37,3 +37,11 @@ code {
     -webkit-transform: rotate(360deg);
   }
 }
+
+/*Media Queries for navbar*/
+@media screen and (max-width: 500px) {
+  .gNavDiv {
+    visibility: hidden;
+    width: 0.01;
+  }
+}

@@ -24,7 +24,7 @@ const Navbar = () => {
   }, [searchText]);
   return (
     <div className={styles.nav}>
-      <div className={styles.leftDiv}>
+      <div className={`gNavDiv ${styles.leftDiv}`}>
         <Link to="/">
           <img
             alt=""
@@ -33,7 +33,7 @@ const Navbar = () => {
           ></img>
         </Link>
       </div>
-      {/* <div className={styles.searchContainer}>
+      <div className={styles.searchContainer}>
         <img
           className={styles.searchIcon}
           src="https://cdn-icons-png.flaticon.com/512/149/149309.png"
@@ -64,7 +64,7 @@ const Navbar = () => {
             </ul>
           </div>
         )}
-      </div> */}
+      </div>
       <div className={styles.rightDiv}>
         {auth.user && (
           <div className={styles.user}>
