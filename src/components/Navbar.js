@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../hooks";
 import { useEffect, useState } from "react";
 import { searchUser } from "../api";
-
+import { useMediaQuery } from "react-responsive";
 const Navbar = () => {
   const [results, setResults] = useState([]);
   const [searchText, setSearchText] = useState("");
   const auth = useAuth();
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   // console.log(auth.user);
   useEffect(() => {
     const fetchUsers = async () => {
