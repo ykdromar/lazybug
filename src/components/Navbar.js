@@ -54,7 +54,7 @@ const Navbar = () => {
                     className={styles.searchResultsRow}
                     key={`user-${user._id}`}
                   >
-                    <Link to={`user/${user._id}`}>
+                    <Link to={`user/${user._id}`} className={styles.link}>
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
                         alt="user-img"
