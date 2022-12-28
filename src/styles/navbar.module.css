@@ -1,18 +1,21 @@
 .nav {
   width: 100%;
   display: flex;
-  height: 50px;
-  background-color: rgb(45, 81, 241);
+  height: 60px;
+  border-bottom: 0.5px solid rgb(77, 162, 242);
   align-items: center;
   justify-content: space-between;
 }
 .leftDiv {
   margin: 10px;
-  margin-left: 25px;
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .rightDiv {
-  margin: 10px;
-  margin-right: 25px;
+  margin: 5px;
+  margin-right: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,19 +31,40 @@
   outline: none;
 }
 .navLinks button:hover {
-  background-color: rgb(236, 236, 236);
+  background-color: rgb(244, 244, 244);
   cursor: pointer;
   outline: none;
 }
 .navLinks button:active {
   transform: translateY(1px);
   outline: none;
-  border: 1px solid black;
+  border: 1px solid rgb(77, 162, 242);
+  background-color: white;
 }
 .searchContainer {
   margin: 10px;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 .searchIcon {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 13px;
+}
+.searchContainer > input {
+  width: 250px;
+  height: 30px;
+  border: none;
+  border-radius: 25px;
+  padding-left: 35px;
+  background-color: rgb(237, 237, 237);
+}
+
+.searchContainer > input:focus {
+  outline: none;
+  border: 1px solid rgb(77, 162, 242);
+  background-color: white;
 }

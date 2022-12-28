@@ -8,7 +8,7 @@ const Navbar = () => {
   const [results, setResults] = useState([]);
   const [searchText, setSearchText] = useState("");
   const auth = useAuth();
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 550px)" });
   // console.log(auth.user);
   useEffect(() => {
     const fetchUsers = async () => {
@@ -25,7 +25,7 @@ const Navbar = () => {
   }, [searchText]);
   return (
     <div className={styles.nav}>
-      <div className={`gNavDiv ${styles.leftDiv}`}>
+      <div className={styles.leftDiv}>
         <Link to="/">
           <img
             alt=""
@@ -33,39 +33,40 @@ const Navbar = () => {
             style={{ width: "35px", height: "35px" }}
           ></img>
         </Link>
+        <div className={styles.searchContainer}>
+          <img
+            className={styles.searchIcon}
+            src="https://cdn-icons-png.flaticon.com/512/149/149309.png"
+            alt=""
+          />
+          <input
+            placeholder="Search"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          ></input>
+          {results.length > 0 && (
+            <div className={styles.searchResults}>
+              <ul>
+                {results.map((user) => (
+                  <li
+                    className={styles.searchResultsRow}
+                    key={`user-${user._id}`}
+                  >
+                    <Link to={`user/${user._id}`}>
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                        alt="user-img"
+                      ></img>
+                      <span>{user.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
-      <div className={styles.searchContainer}>
-        <img
-          className={styles.searchIcon}
-          src="https://cdn-icons-png.flaticon.com/512/149/149309.png"
-          alt=""
-        />
-        <input
-          placeholder="Search users"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        ></input>
-        {results.length > 0 && (
-          <div className={styles.searchResults}>
-            <ul>
-              {results.map((user) => (
-                <li
-                  className={styles.searchResultsRow}
-                  key={`user-${user._id}`}
-                >
-                  <Link to={`user/${user._id}`}>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                      alt="user-img"
-                    ></img>
-                    <span>{user.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+
       <div className={styles.rightDiv}>
         {auth.user && (
           <div className={styles.user}>
@@ -79,24 +80,25 @@ const Navbar = () => {
             <span>{auth.user.name}</span>
           </div>
         )}
+        {!isTabletOrMobile && (
+          <div className={styles.navLinks}>
+            {auth.user ? (
+              <>
+                <button onClick={auth.logout}>Log out</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <button>Sign in</button>
+                </Link>
 
-        <div className={styles.navLinks}>
-          {auth.user ? (
-            <>
-              <button onClick={auth.logout}>Log out</button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">
-                <button>Sign in</button>
-              </Link>
-
-              <Link to="/register">
-                <button>Register</button>
-              </Link>
-            </>
-          )}
-        </div>
+                <Link to="/register">
+                  <button>Register</button>
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
