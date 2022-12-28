@@ -7,7 +7,7 @@
   justify-content: space-between;
 }
 .leftDiv {
-  margin: 10px;
+  margin: 5px;
   margin-left: 15px;
   display: flex;
   justify-content: center;
@@ -46,7 +46,7 @@
 
 .searchContainer {
   margin: 10px;
-  width: 260px;
+  width: 90%;
   display: flex;
   align-items: center;
   position: relative;
@@ -58,7 +58,7 @@
   left: 13px;
 }
 .searchContainer > input {
-  width: 250px;
+  width: inherit;
   height: 30px;
   border: none;
   border-radius: 25px;
