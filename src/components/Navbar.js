@@ -4,8 +4,10 @@ import { useAuth } from "../hooks";
 import { useEffect, useState } from "react";
 import { searchUser } from "../api";
 import { useMediaQuery } from "react-responsive";
+import DropdownMenu from "./DropdownMenu";
 const Navbar = () => {
   const [results, setResults] = useState([]);
+  const [isOpened, setIsOpened] = useState(false);
   const [searchText, setSearchText] = useState("");
   const auth = useAuth();
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 550px)" });
@@ -80,7 +82,7 @@ const Navbar = () => {
             <span>{auth.user.name}</span>
           </div>
         )}
-        {!isTabletOrMobile && (
+        {!isTabletOrMobile ? (
           <div className={styles.navLinks}>
             {auth.user ? (
               <>
@@ -98,6 +100,26 @@ const Navbar = () => {
               </>
             )}
           </div>
+        ) : (
+          <DropdownMenu isOpened={isOpened} setIsOpened={setIsOpened}>
+            <div className={styles.navLinks}>
+              {auth.user ? (
+                <>
+                  <button onClick={auth.logout}>Log out</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <button>Sign in</button>
+                  </Link>
+
+                  <Link to="/register">
+                    <button>Register</button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </DropdownMenu>
         )}
       </div>
     </div>
