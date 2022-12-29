@@ -36,7 +36,8 @@ const CreatePost = () => {
         onChange={(e) => {
           setPost(e.target.value);
         }}
-        required
+        required={true}
+        placeholder="Write your thoughts here ... "
       ></textarea>
       <div>
         <button
@@ -44,7 +45,7 @@ const CreatePost = () => {
           onClick={handelAddPost}
           disabled={addingPost}
         >
-          {addingPost ? "Adding Post" : "Add Post"}
+          {addingPost ? "Adding Post" : "Post"}
         </button>
       </div>
     </div>

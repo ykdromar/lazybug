@@ -97,7 +97,7 @@ const Post = ({ post }) => {
             <Link to={`user/${post.user._id}`} className={styles.postAuthor}>
               {post.user.name}
             </Link>
-            <span className={styles.postTime}>a minute ago</span>
+            <span className={styles.postTime}>{/*time */}</span>
           </div>
         </div>
         <div className={styles.postContent}>{post.content}</div>
@@ -128,7 +128,7 @@ const Post = ({ post }) => {
         {auth.user && (
           <div className={styles.postCommentBox}>
             <input
-              placeholder="Start typing a comment"
+              placeholder="Write your comment"
               onKeyDown={handelAddComment}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
@@ -143,7 +143,7 @@ const Post = ({ post }) => {
                 <span className={styles.postCommentAuthor}>
                   {comment.user.name}
                 </span>
-                <span className={styles.postCommentTime}>a minute ago</span>
+                <span className={styles.postCommentTime}>{/* time */}</span>
                 <span className={styles.postCommentLikes}>
                   <button
                     onClick={() => {
