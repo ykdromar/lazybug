@@ -1,0 +1,98 @@
+.chatbox {
+  position: fixed;
+  bottom: 2px;
+  right: 2px;
+  width: 250px;
+  height: 300px;
+  border: 1px solid black;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: white;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.messages {
+  list-style-type: none;
+  box-sizing: border-box;
+  padding: 3px;
+  margin: 10px;
+  margin-bottom: 0px;
+  width: 90%;
+  border: 1px solid black;
+  height: 80%;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  overflow-y: auto;
+}
+
+.message {
+  display: flex;
+  margin: 10px;
+}
+.message span {
+  font-size: smaller;
+  box-sizing: border-box;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.incommingMessage {
+  justify-content: flex-start;
+}
+.incommingMessage span {
+  background-color: white;
+}
+.outgoingMessage {
+  justify-content: flex-end;
+}
+.outgoingMessage span {
+  background-color: #b4fcd9;
+}
+
+/*New Message*/
+.newMessage {
+  display: flex;
+  justify-content: center;
+  column-gap: 8px;
+  margin: 10px;
+  align-items: center;
+}
+.newMessage button {
+  border: 1px solid black;
+  background-color: white;
+  width: 50px;
+  height: 30px;
+
+  text-align: center;
+  border-radius: 5px;
+  outline: none;
+}
+
+.newMessage button:hover {
+  cursor: pointer;
+  outline: none;
+  outline: 2px solid rgb(77, 162, 242);
+  outline-offset: 2px;
+}
+.newMessage button:active {
+  transform: translateY(1px);
+  outline: none;
+  background-color: white;
+}
+.newMessage input {
+  width: 68%;
+  height: 30px;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 25px;
+  padding-left: 10px;
+  background-color: rgb(237, 237, 237);
+}
+
+.newMessage input:focus {
+  outline: none;
+  border: 1px solid rgb(77, 162, 242);
+  background-color: white;
+}

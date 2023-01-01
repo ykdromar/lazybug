@@ -1,14 +1,26 @@
 import styles from "../styles/home.module.css";
-import { FriendList, Loader, CreatePost, Post } from "../components";
+import { FriendList, Loader, CreatePost, Post, ChatBox } from "../components";
 import { useAuth, usePosts } from "../hooks";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 const Home = () => {
   const auth = useAuth();
   const { posts, loading } = usePosts();
+  const [socket, setSocket] = useState(null);
 
+  useEffect(() => {
+    const newSocket = io(`https://codeial.ykdromar.me`);
+    setSocket(newSocket);
+    console.log(newSocket);
+    newSocket.on("connect", () => {
+      console.log("connected");
+    });
+  }, []);
   if (loading) {
     return <Loader />;
   }
+
   return (
     <div className={styles.home}>
       <div className={styles.postsList}>
@@ -19,6 +31,7 @@ const Home = () => {
         ))}
       </div>
       {/* {auth.user && <FriendList />} */}
+      {auth.user && <ChatBox socket={socket} />}
     </div>
   );
 };
