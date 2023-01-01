@@ -18,6 +18,8 @@
   list-style-type: none;
   box-sizing: border-box;
   padding: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin: 10px;
   margin-bottom: 0px;
   width: 90%;

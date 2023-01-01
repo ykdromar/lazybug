@@ -17,7 +17,6 @@ const ChatBox = (props) => {
       console.log("disconnected");
     });
   }, []);
-
   socket.on("user_joined", function (data) {
     console.log("a user joined", data);
   });
@@ -35,14 +34,16 @@ const ChatBox = (props) => {
   });
 
   const sendMessage = () => {
-    let newMessage = {
-      message: newMessageValue,
-      user_email: auth.user.email,
-      chatroom: "Codeial",
-    };
-    setNewMessageValue("");
-    console.log("Sending message", newMessage);
-    socket.emit("send_message", newMessage);
+    if (newMessageValue !== "") {
+      let newMessage = {
+        message: newMessageValue,
+        user_email: auth.user.email,
+        chatroom: "Codeial",
+      };
+      setNewMessageValue("");
+      console.log("Sending message", newMessage);
+      socket.emit("send_message", newMessage);
+    }
   };
   return (
     <div className={styles.chatbox}>

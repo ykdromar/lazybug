@@ -31,7 +31,7 @@ const Home = () => {
         ))}
       </div>
       {/* {auth.user && <FriendList />} */}
-      {auth.user && <ChatBox socket={socket} />}
+      {auth.user && socket && <ChatBox socket={socket} />}
     </div>
   );
 };
