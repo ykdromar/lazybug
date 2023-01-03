@@ -6,7 +6,7 @@ const ChatBox = (props) => {
   const auth = useAuth();
   const [messages, setMessages] = useState([]);
   const [newMessageValue, setNewMessageValue] = useState("");
-  const { socket } = props;
+  const { socket, setShowChatBox } = props;
 
   useEffect(() => {
     socket.emit("Join_room", {
@@ -47,6 +47,16 @@ const ChatBox = (props) => {
   };
   return (
     <div className={styles.chatbox}>
+      <div className={styles.chatHeader}>
+        <span>Chat Room</span>
+        <span
+          onClick={() => {
+            setShowChatBox(false);
+          }}
+        >
+          ❌
+        </span>
+      </div>
       <ul className={styles.messages}>
         {messages.map((message, index) => {
           if (message.type === "incomming") {

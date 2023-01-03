@@ -17,17 +17,18 @@
 .messages {
   list-style-type: none;
   box-sizing: border-box;
-  padding: 3px;
   padding-top: 5px;
   padding-bottom: 5px;
-  margin: 10px;
+  margin: 5px;
+  margin-top: 0px;
   margin-bottom: 0px;
-  width: 90%;
-  border: 1px solid black;
-  height: 80%;
+  width: 100%;
+  /* border: 1px solid black; */
+  height: 70%;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   overflow-y: auto;
+  background-color: white;
 }
 
 .message {
@@ -55,10 +56,13 @@
 
 /*New Message*/
 .newMessage {
+  border-top: 0.2px solid rgb(237, 237, 237);
+  padding-top: 10px;
   display: flex;
   justify-content: center;
   column-gap: 8px;
-  margin: 10px;
+  /* margin: 10px; */
+  width: 100%;
   align-items: center;
 }
 .newMessage button {
@@ -97,4 +101,20 @@
   outline: none;
   border: 1px solid rgb(77, 162, 242);
   background-color: white;
+}
+
+.chatHeader {
+  background-color: rgb(77, 162, 242);
+  box-sizing: border-box;
+  padding: 5px;
+  height: 13%;
+  width: 100%;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
 }
