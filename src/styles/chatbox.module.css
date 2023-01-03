@@ -17,6 +17,7 @@
 .messages {
   list-style-type: none;
   box-sizing: border-box;
+  padding: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 5px;
@@ -40,6 +41,8 @@
   box-sizing: border-box;
   padding: 5px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  word-wrap: break-word;
+  max-width: 170px;
 }
 .incommingMessage {
   justify-content: flex-start;
