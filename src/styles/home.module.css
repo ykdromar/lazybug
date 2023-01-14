@@ -270,24 +270,3 @@
   outline: none;
   background-color: white;
 }
-/*Chat Icon*/
-.chatIcon {
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  border: 0.3px solid black;
-  cursor: pointer;
-}
-
-.chatIcon img {
-  width: 25px;
-  height: 25px;
-}
