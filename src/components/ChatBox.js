@@ -9,6 +9,7 @@ const ChatBox = (props) => {
   const { socket, setShowChatBox } = props;
 
   useEffect(() => {
+    setMessages(JSON.parse(localStorage.getItem("CODEIALCHAT")));
     socket.emit("Join_room", {
       user_email: auth.user.email,
       chatroom: "Codeial",
@@ -18,7 +19,7 @@ const ChatBox = (props) => {
     });
   }, []);
   socket.on("user_joined", function (data) {
-    console.log("a user joined", data);
+    console.log("a user joined");
   });
   socket.on("recieved_message", (data) => {
     let messageType = "incomming";
@@ -29,7 +30,8 @@ const ChatBox = (props) => {
       content: data.message,
       type: messageType,
     };
-
+    let chat = [...messages, newMessage];
+    localStorage.setItem("CODEIALCHAT", JSON.stringify(chat));
     setMessages([...messages, newMessage]);
   });
 
@@ -41,7 +43,7 @@ const ChatBox = (props) => {
         chatroom: "Codeial",
       };
       setNewMessageValue("");
-      console.log("Sending message", newMessage);
+      // console.log("Sending message", newMessage);
       socket.emit("send_message", newMessage);
     }
   };

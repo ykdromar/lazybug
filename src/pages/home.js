@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const newSocket = io(`https://codeial.ykdromar.me`);
     setSocket(newSocket);
-    console.log(newSocket);
+    // console.log(newSocket);
     newSocket.on("connect", () => {
       console.log("connected");
     });
