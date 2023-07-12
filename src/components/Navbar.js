@@ -57,7 +57,11 @@ const Navbar = () => {
                   >
                     <Link to={`user/${user._id}`} className={styles.link}>
                       <img
-                        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                        src={
+                          user.avatar != ""
+                            ? user.avatar
+                            : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+                        }
                         alt="user-img"
                       ></img>
                       <span>{user.name}</span>
@@ -76,7 +80,11 @@ const Navbar = () => {
             <Link to="/settings">
               <img
                 alt="user"
-                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                src={
+                  auth.user.avatar != ""
+                    ? auth.user.avatar
+                    : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+                }
                 className={styles.userDp}
               ></img>
             </Link>

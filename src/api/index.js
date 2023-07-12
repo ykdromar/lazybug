@@ -1,8 +1,7 @@
 import { API_URLS, getFormBody, LOCALSTORAGE_TOKEN_KEY } from "../utils";
-const customFetch = async (url, { body, ...customConfig }) => {
+const customFetch = async (url, { body, isMulti, ...customConfig }) => {
   const token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
   const headers = {
-    "content-type": "application/x-www-form-urlencoded",
     Accept: "application/json",
   };
   if (token) {
@@ -15,8 +14,12 @@ const customFetch = async (url, { body, ...customConfig }) => {
       ...customConfig.headers,
     },
   };
-  if (body) {
+  if (body && !isMulti) {
+    console.log("Not multi");
     config.body = getFormBody(body);
+  } else if (body && isMulti) {
+    console.log("multi");
+    config.body = body;
   }
   try {
     const response = await fetch(url, config);
@@ -39,13 +42,21 @@ const customFetch = async (url, { body, ...customConfig }) => {
 };
 // function to get all the posts
 export const getPosts = (page = 1, limit = 100) => {
-  return customFetch(API_URLS.posts(page, limit), { method: "GET" });
+  return customFetch(API_URLS.posts(page, limit), {
+    method: "GET",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
+  });
 };
 // function to login
 export const login = (email, password) => {
   return customFetch(API_URLS.login(), {
     method: "POST",
     body: { email, password },
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 //function to signup
@@ -53,25 +64,40 @@ export const signup = (name, email, password, confirm_password) => {
   return customFetch(API_URLS.signup(), {
     method: "POST",
     body: { name, email, password, confirm_password },
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 //function to update
-export const updateUser = (id, name, password, confirm_password) => {
+export const updateUser = (name, password, confirm_password, avatar) => {
+  let formData = new FormData();
+  formData.append("name", name);
+  formData.append("password", password);
+  formData.append("confirm_password", confirm_password);
+  formData.append("avatar", avatar);
   return customFetch(API_URLS.editUser(), {
     method: "POST",
-    body: { id, name, password, confirm_password },
+    body: formData,
+    isMulti: true,
   });
 };
 //function to fetch user details
 export const userInfo = (userId) => {
   return customFetch(API_URLS.userInfo(userId), {
     method: "GET",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 // function to fetch the user friends
 export const fetchUserFriends = () => {
   return customFetch(API_URLS.friends(), {
     method: "GET",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 
@@ -79,6 +105,9 @@ export const fetchUserFriends = () => {
 export const addFriend = (userId) => {
   return customFetch(API_URLS.createFriendship(userId), {
     method: "POST",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 
@@ -86,6 +115,9 @@ export const addFriend = (userId) => {
 export const removeFriend = (userId) => {
   return customFetch(API_URLS.removeFriend(userId), {
     method: "POST",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 
@@ -93,6 +125,9 @@ export const removeFriend = (userId) => {
 export const addPost = (content) => {
   return customFetch(API_URLS.createPost(), {
     method: "POST",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
     body: {
       content,
     },
@@ -108,6 +143,9 @@ export const addComment = (content, post_id, user_id) => {
       content,
       user_id,
     },
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 
@@ -118,6 +156,9 @@ export const toggleLike = (itemId, itemType, user_id) => {
     body: {
       user_id,
     },
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };
 
@@ -125,5 +166,8 @@ export const toggleLike = (itemId, itemType, user_id) => {
 export const searchUser = (searchText) => {
   return customFetch(API_URLS.searchUsers(searchText), {
     method: "GET",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
   });
 };

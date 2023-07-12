@@ -81,8 +81,13 @@ export const useProvideAuth = () => {
       };
     }
   };
-  const updateUser = async (id, name, password, confirmPassword) => {
-    const response = await updateProfile(id, name, password, confirmPassword);
+  const updateUser = async (name, password, confirmPassword, avatar) => {
+    const response = await updateProfile(
+      name,
+      password,
+      confirmPassword,
+      avatar
+    );
     console.log(response);
     if (response.success) {
       setUser(response.data.user);

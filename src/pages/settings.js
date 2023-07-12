@@ -10,6 +10,7 @@ const Settings = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [savingForm, setSavingForm] = useState(false);
+  const [avatar, setAvatar] = useState(null);
   const { addToast } = useToasts();
   const updateProfile = async (name, password, confirmPassword) => {
     setSavingForm(true);
@@ -28,10 +29,10 @@ const Settings = () => {
       });
     }
     const response = await auth.updateUser(
-      auth.user._id,
       name,
       password,
-      confirmPassword
+      confirmPassword,
+      avatar
     );
     console.log(response);
     if (response.success) {
@@ -57,9 +58,22 @@ const Settings = () => {
     <div className={styles.settings}>
       <div className={styles.imgContainer}>
         <img
-          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+          src={
+            auth.user.avatar != ""
+              ? auth.user.avatar
+              : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+          }
           alt="user-img"
         ></img>
+        {editMode && (
+          <input
+            type="file"
+            onChange={(e) => {
+              setAvatar(e.target.files[0]);
+              // console.log(e.target.files[0]);
+            }}
+          ></input>
+        )}
       </div>
       <div className={styles.field}>
         <div className={styles.fieldLabel}>Email</div>
