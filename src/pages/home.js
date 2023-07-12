@@ -10,7 +10,7 @@ const Home = () => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io(`https://codeial.ykdromar.me`);
+    const newSocket = io(`https://api.cherrybuds.in`);
     setSocket(newSocket);
     // console.log(newSocket);
     newSocket.on("connect", () => {

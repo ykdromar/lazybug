@@ -24,32 +24,30 @@
   flex-direction: column;
 }
 .settings button {
-  border-radius: 6px;
   padding: 10px;
   width: fit-content;
   font-size: 16px;
-  border-radius: 3px;
+  border-radius: 10px;
   margin-top: 20px;
+  background-color: #fff;
 }
 .settings button:hover {
+  background-color: var(--primaryColor);
   cursor: pointer;
 }
 .settings button:focus {
   outline: none;
 }
 .settings .editBtn {
-  border: 1px solid #ef7917;
   box-sizing: border-box;
-  color: #ef7917;
 }
 .settings .saveBtn {
-  background: #ef7917;
-  color: #fff;
-  border: none;
+  color: black;
+  border: 2 px solid black;
   padding: 10px 20px;
 }
 .settings .goBack {
-  color: #ef7917;
+  color: var(--primaryColor);
   margin-top: 7px;
   font-size: 13px;
 }

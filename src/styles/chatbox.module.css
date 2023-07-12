@@ -82,7 +82,7 @@
 .newMessage button:hover {
   cursor: pointer;
   outline: none;
-  outline: 2px solid rgb(77, 162, 242);
+  outline: 2px solid var(--primaryColor);
   outline-offset: 2px;
 }
 .newMessage button:active {
@@ -102,12 +102,12 @@
 
 .newMessage input:focus {
   outline: none;
-  border: 1px solid rgb(77, 162, 242);
+  border: 2px solid var(--primaryColor);
   background-color: white;
 }
 
 .chatHeader {
-  background-color: rgb(77, 162, 242);
+  background-color: var(--primaryColor);
   box-sizing: border-box;
   padding: 5px;
   height: 13%;

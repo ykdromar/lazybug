@@ -97,7 +97,6 @@ const Post = ({ post }) => {
             <Link to={`user/${post.user._id}`} className={styles.postAuthor}>
               {post.user.name}
             </Link>
-            <span className={styles.postTime}>{/*time */}</span>
           </div>
         </div>
         <div className={styles.postContent}>{post.content}</div>

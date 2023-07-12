@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { searchUser } from "../api";
 import { useMediaQuery } from "react-responsive";
 import DropdownMenu from "./DropdownMenu";
+import logo from "../assets/lazybug-logos.png";
 const Navbar = () => {
   const [results, setResults] = useState([]);
   const [isOpened, setIsOpened] = useState(false);
@@ -31,8 +32,8 @@ const Navbar = () => {
         <Link to="/">
           <img
             alt=""
-            src="https://cdn-icons-png.flaticon.com/512/3800/3800024.png"
-            style={{ width: "35px", height: "35px" }}
+            src={logo}
+            style={{ width: "50px", height: "35px" }}
           ></img>
         </Link>
         <div className={styles.searchContainer}>
