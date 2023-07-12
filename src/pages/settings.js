@@ -2,7 +2,7 @@ import styles from "../styles/settings.module.css";
 import { useAuth } from "../hooks";
 import { useState } from "react";
 import { useToasts } from "react-toast-notifications";
-
+import imageCompression from "browser-image-compression";
 const Settings = () => {
   const auth = useAuth();
   const [editMode, setEditMode] = useState(false);
@@ -28,11 +28,13 @@ const Settings = () => {
         appearance: "error",
       });
     }
+
+    const compressedFile = await imageCompression(avatar, { maxSizeMB: 0.05 });
     const response = await auth.updateUser(
       name,
       password,
       confirmPassword,
-      avatar
+      compressedFile
     );
     console.log(response);
     if (response.success) {

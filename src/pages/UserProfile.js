@@ -90,7 +90,11 @@ const UserProfile = () => {
     <div className={styles.settings}>
       <div className={styles.imgContainer}>
         <img
-          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+          src={
+            user.avatar != ""
+              ? auth.user.avatar
+              : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+          }
           alt="user-img"
         ></img>
       </div>
