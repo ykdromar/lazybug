@@ -10,7 +10,7 @@ const Home = () => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io(`https://api.cherrybuds.in`);
+    const newSocket = io(process.env.REACT_APP_ROOT_API);
     setSocket(newSocket);
     // console.log(newSocket);
     newSocket.on("connect", () => {
